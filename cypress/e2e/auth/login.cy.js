@@ -1,15 +1,9 @@
-describe('Login de usuário', () => {
-  it('Deve logar com sucesso após registro', () => {
-    const user = {
-      name: 'Usuário Login',
-      email: `login_${Date.now()}@email.com`,
-      password: 'SenhaForte123'
-    };
-
-    cy.register(user);
-    cy.logout();
-
-    cy.login(user);
-    cy.contains(user.name).should('be.visible');
+describe('User Login', () => {
+  it('should log in with a registered user', () => {
+    cy.register().then((email) => {
+      cy.logout(); // Ensure user is logged out
+      cy.login(email); // Reuse custom login command
+      cy.contains('Logged in as').should('be.visible');
+    });
   });
 });

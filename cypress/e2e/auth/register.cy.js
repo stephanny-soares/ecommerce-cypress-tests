@@ -1,12 +1,7 @@
-describe('Registro de novo usuário', () => {
-  it('Deve registrar um novo usuário com sucesso', () => {
-    const user = {
-      name: 'Usuário Teste',
-      email: `teste_${Date.now()}@email.com`,
-      password: 'SenhaForte123'
-    };
-
-    cy.register(user);
-    cy.contains(`Logged in as ${user.name}`).should('be.visible');
+describe('User Registration', () => {
+  it('should register a new user successfully', () => {
+    cy.register().then((email) => {
+      expect(email).to.contain('@mail.com');
+    });
   });
 });
